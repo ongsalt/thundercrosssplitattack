@@ -1,0 +1,20 @@
+.full {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+.link {
+    color: lightskyblue;
+}
+.link:hover {
+    text-decoration: underline ;
+}
+
+.text {
+    color: white;
+} 
