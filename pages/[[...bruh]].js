@@ -105,13 +105,13 @@ function Bruh({ link, meta }) {
 
 export async function getServerSideProps({ query }) {
 
+  if (!query) return { props: {} }
+
   const link = 'https://' + query.bruh
     .filter(e => !e.includes('http'))
     .join('/')
 
-  if (!isValidHttpUrl(link)) {
-    return { props: {} }
-  }
+  if (!isValidHttpUrl(link)) return { props: {} }
 
   const page = await fetch(link)
   const pageHtml = await page.text()
