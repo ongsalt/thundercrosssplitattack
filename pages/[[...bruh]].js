@@ -84,7 +84,7 @@ function Bruh({ link, meta }) {
   return (
     <div className={styles.full}>
       <Head>
-        <title> Thunder cross splitting attack </title>
+        <title> {meta.find(item => item.property === 'og:title').content || 'Pixiv'}  </title>
         {meta.map(each => {
           console.log({each})
           // eslint-disable-next-line react/jsx-key
