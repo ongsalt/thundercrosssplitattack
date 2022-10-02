@@ -148,7 +148,7 @@ export async function getServerSideProps({ query }) {
     decsription,
     site_name
   ]
-  console.log(usableMeta)
+  console.log({usableMeta})
 
   // console.log('Done printing og')
 
