@@ -135,6 +135,9 @@ export async function getServerSideProps({ query }) {
   // console.log(meta)
 
   const image = meta.find(p => p.property === 'og:image')
+
+  image.content.replace('decorate', 'artwork') // pixiv hate bot
+
   const title = meta.find(p => p.property === 'og:title')
   const decsription = meta.find(p => p.name === 'description')
   const site_name = meta.find(p => p.property === 'og:site_name')
