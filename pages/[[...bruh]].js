@@ -51,14 +51,14 @@ function isValidHttpUrl(string) {
 }
 
 
-function Meta(link, image, site, description) {
+function Meta({meta}) {
   return (
     <>
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={link} />
-      <meta property="og:title" content={site} />
+      <meta property="og:url" content={meta.link} />
+      <meta property="og:title" content={meta.site} />
       {/* <meta property="og:description" content="LinkFork lets you shorten, and customize how your link will appear when shared on social media, for free." /> */}
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={meta.image} />
     </>
   )
 }
@@ -86,9 +86,11 @@ function Bruh({ link, meta }) {
       <Head>
         <title> Thunder cross splitting attack </title>
         {meta.map(each => {
+          console.log({each})
           // eslint-disable-next-line react/jsx-key
-          return (<meta property={each.property} content={each.content} name={each.name} />)
+          return (<meta property={each.property} content={each.content} name={each.name} key={each.property}/>)
         })}
+        <Meta meta={meta}/>
       </Head>
       <Image
         src={thunder}
@@ -130,7 +132,7 @@ export async function getServerSideProps({ query }) {
     })
     return out
   })
-  console.log(meta)
+  // console.log(meta)
 
   const image = meta.find(p => p.property === 'og:image')
   const title = meta.find(p => p.property === 'og:title')
@@ -143,6 +145,7 @@ export async function getServerSideProps({ query }) {
     decsription,
     site_name
   ]
+  console.log(usableMeta)
 
   // console.log('Done printing og')
 
