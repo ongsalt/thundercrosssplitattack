@@ -135,8 +135,11 @@ export async function getServerSideProps({ query }) {
   // console.log(meta)
 
   const image = meta.find(p => p.property === 'og:image')
-
+  const twitterImage = meta.find(p => p.property === 'twitter:image')
+  const twitterCard = { property: 'twitter:card', content: 'summary_large_image' }
+  
   image.content = image.content.replace('decorate', 'artwork') // pixiv hate bot
+  twitterImage.content = twitterImage.content.replace('decorate', 'artwork') // same
 
   const title = meta.find(p => p.property === 'og:title')
   const decsription = meta.find(p => p.name === 'description')
@@ -146,7 +149,9 @@ export async function getServerSideProps({ query }) {
     image,
     title,
     decsription,
-    site_name
+    site_name,
+    twitterCard,
+    twitterImage
   ]
   console.log({usableMeta})
 
