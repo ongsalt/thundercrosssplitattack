@@ -134,6 +134,7 @@ export async function getServerSideProps({ query }) {
   })
   // console.log(meta)
 
+  //Pixiv
   const image = meta.find(p => p.property === 'og:image')
   const twitterImage = meta.find(p => p.property === 'twitter:image')
   const twitterCard = { property: 'twitter:card', content: 'summary_large_image' }
