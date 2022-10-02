@@ -38,6 +38,19 @@ const RealOne = ({ realLink }) => {
   )
 }
 
+function isValidHttpUrl(string) {
+  let url;
+
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+
 function Meta(link, image, site, description) {
   return (
     <>
@@ -52,7 +65,21 @@ function Meta(link, image, site, description) {
 
 function Bruh({ link, meta }) {
 
-  console.log({ link, meta })
+  if (!link || !meta) {
+    return (
+      <div className={styles.full}>
+        <Head>
+          <title> Thunder cross splitting attack </title>
+
+        </Head>
+        <Image
+          src={thunder}
+          alt='You fell for it, fool! Thunder Cross Split Attack'
+          layout='intrinsic'
+        />
+      </div>
+    )
+  }
 
   return (
     <div className={styles.full}>
@@ -60,9 +87,8 @@ function Bruh({ link, meta }) {
         <title> Thunder cross splitting attack </title>
         {meta.map(each => {
           // eslint-disable-next-line react/jsx-key
-          return (<meta property={each.property} content={each.content} name={each.name}/>)
+          return (<meta property={each.property} content={each.content} name={each.name} />)
         })}
-        <Meta />
       </Head>
       <Image
         src={thunder}
@@ -82,6 +108,10 @@ export async function getServerSideProps({ query }) {
   const link = 'https://' + query.bruh
     .filter(e => !e.includes('http'))
     .join('/')
+
+  if (!isValidHttpUrl(link)) {
+    return { props: {} }
+  }
 
   const page = await fetch(link)
   const pageHtml = await page.text()
