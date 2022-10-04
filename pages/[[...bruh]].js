@@ -58,9 +58,11 @@ function Bruh({ link, meta }) {
   const [rickrolled, setRickrolled] = useState(false);
   // Make sure we're in the browser
   if ((typeof window !== 'undefined') && !rickrolled) {
-    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')
+    // window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')
     setRickrolled(true)
-    router.push('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    setTimeout(async () => {
+      router.push('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    }, 1000)
   }
 
   if (!link || !meta) {
