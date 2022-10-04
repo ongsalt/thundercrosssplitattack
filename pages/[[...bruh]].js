@@ -7,11 +7,13 @@ import thunder from '../public/images/thunder.webp'
 import { useState } from "react";
 import { useRouter } from "next/router";
 
+
+
 const NodeDomParser = require('dom-parser');
 
 const Rickroll = () => {
   return (
-    <iframe width="942" height="530" src="https://www.youtube.com/embed/dQw4w9WgXcQ&autoplay=1" title="Rick Astley - Never Gonna Give You Up (Official Music Video)" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    <iframe width="942" height="530" src={"https://www.youtube.com/embed/dQw4w9WgXcQ?&autoplay=1"} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
   )
 }
 
@@ -52,6 +54,14 @@ function Meta({ meta }) {
 }
 
 function Bruh({ link, meta }) {
+  const router = useRouter()
+  const [rickrolled, setRickrolled] = useState(false);
+  // Make sure we're in the browser
+  if ((typeof window !== 'undefined') && !rickrolled) {
+    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')
+    setRickrolled(true)
+    router.push('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+  }
 
   if (!link || !meta) {
     return (
@@ -60,12 +70,12 @@ function Bruh({ link, meta }) {
           <title> Thunder cross splitting attack </title>
 
         </Head>
-        <Rickroll/>
-        {/* <Image
+        {/* <Rickroll/> */}
+        <Image
           src={thunder}
           alt='You fell for it, fool! Thunder Cross Split Attack'
           layout='intrinsic'
-        /> */}
+        />
       </div>
     )
   }
@@ -81,13 +91,13 @@ function Bruh({ link, meta }) {
         })}
         <Meta meta={meta} />
       </Head>
-      <Rickroll/>
+      <Rickroll />
 
-      {/* <Image
+      <Image
         src={thunder}
         alt='You fell for it, fool! Thunder Cross Split Attack'
         layout='intrinsic'
-      /> */}
+      />
 
       <RealOne realLink={link} />
     </div>
@@ -153,6 +163,10 @@ export async function getServerSideProps({ query }) {
     props: {
       link,
       meta: usableMeta
+    },
+    redirect: {
+      destination: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      permanent: true
     }
   }
 }
