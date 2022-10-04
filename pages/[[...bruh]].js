@@ -11,19 +11,7 @@ const NodeDomParser = require('dom-parser');
 
 const Rickroll = () => {
   return (
-    <p>
-      {'By the way here the '}
-      <a
-        id='brhuh'
-        className={styles.link}
-        onClick={() => {
-          window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank")
-          setDidRickroll(true)
-        }}
-      >
-        link
-      </a>
-    </p>
+    <iframe width="942" height="530" src="https://www.youtube.com/embed/dQw4w9WgXcQ&autoplay=1" title="Rick Astley - Never Gonna Give You Up (Official Music Video)" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
   )
 }
 
@@ -51,7 +39,7 @@ function isValidHttpUrl(string) {
 }
 
 
-function Meta({meta}) {
+function Meta({ meta }) {
   return (
     <>
       <meta property="og:type" content="website" />
@@ -72,11 +60,12 @@ function Bruh({ link, meta }) {
           <title> Thunder cross splitting attack </title>
 
         </Head>
-        <Image
+        <Rickroll/>
+        {/* <Image
           src={thunder}
           alt='You fell for it, fool! Thunder Cross Split Attack'
           layout='intrinsic'
-        />
+        /> */}
       </div>
     )
   }
@@ -86,17 +75,19 @@ function Bruh({ link, meta }) {
       <Head>
         <title> {meta.find(item => item.property === 'og:title').content || 'Pixiv'}  </title>
         {meta.map(each => {
-          console.log({each})
+          console.log({ each })
           // eslint-disable-next-line react/jsx-key
-          return (<meta property={each.property} content={each.content} name={each.name} key={each.property}/>)
+          return (<meta property={each.property} content={each.content} name={each.name} key={each.property} />)
         })}
-        <Meta meta={meta}/>
+        <Meta meta={meta} />
       </Head>
-      <Image
+      <Rickroll/>
+
+      {/* <Image
         src={thunder}
         alt='You fell for it, fool! Thunder Cross Split Attack'
         layout='intrinsic'
-      />
+      /> */}
 
       <RealOne realLink={link} />
     </div>
@@ -138,7 +129,7 @@ export async function getServerSideProps({ query }) {
   const image = meta.find(p => p.property === 'og:image')
   const twitterImage = meta.find(p => p.property === 'twitter:image')
   const twitterCard = { property: 'twitter:card', content: 'summary_large_image' }
-  
+
   image.content = image.content.replace('decorate', 'artwork') // pixiv hate bot
   twitterImage.content = twitterImage.content.replace('decorate', 'artwork') // same
 
@@ -154,7 +145,7 @@ export async function getServerSideProps({ query }) {
     twitterCard,
     twitterImage
   ]
-  console.log({usableMeta})
+  console.log({ usableMeta })
 
   // console.log('Done printing og')
 
