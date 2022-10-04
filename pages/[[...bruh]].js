@@ -93,7 +93,7 @@ function Bruh({ link, meta }) {
         })}
         <Meta meta={meta} />
       </Head>
-      <Rickroll />
+      {/* <Rickroll /> */}
 
       <Image
         src={thunder}
