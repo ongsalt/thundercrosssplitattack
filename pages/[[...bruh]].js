@@ -54,16 +54,16 @@ function Meta({ meta }) {
 }
 
 function Bruh({ link, meta }) {
-  // const router = useRouter()
-  // const [rickrolled, setRickrolled] = useState(false);
+  const router = useRouter()
+  const [rickrolled, setRickrolled] = useState(false);
   // Make sure we're in the browser
-  // if ((typeof window !== 'undefined') && !rickrolled) {
+  if ((typeof window !== 'undefined') && !rickrolled) {
     // window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')
-    // setRickrolled(true)
-    // setTimeout(async () => {
-      // router.push('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-    // }, 1000)
-  // }
+    setRickrolled(true)
+    setTimeout(async () => {
+      router.push('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    }, 1000)
+  }
 
   if (!link || !meta) {
     return (
@@ -165,10 +165,6 @@ export async function getServerSideProps({ query }) {
     props: {
       link,
       meta: usableMeta
-    },
-    redirect: {
-      destination: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-      permanent: true
     }
   }
 }
