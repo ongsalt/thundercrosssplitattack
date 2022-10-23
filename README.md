@@ -9,5 +9,5 @@ By the way you can edit /pages/[[...bruh]].js to what ever you want not just for
 
 
 ## About this thing URL
-just use [tcsa.vercel.app](tcsa.vercel.app) or
+just use [tcsa.vercel.app](https://tcsa.vercel.app) or
 you can self host it by clone this repo and throw it to some service like vercel.
